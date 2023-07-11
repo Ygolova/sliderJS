@@ -53,7 +53,7 @@ function prevHandler() {
 }
 
 document.addEventListener('keydown', function(key) {
-  if (key.code === 'ArrowLeft') {
+  if (key.codeы === 'ArrowLeft') {
     prevSlide();
     pause();
   } else if (key.code === 'ArrowRight') {

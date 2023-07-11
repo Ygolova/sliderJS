@@ -1,5 +1,7 @@
 * {
   margin: 0;
+  overflow-y: hidden;
+  overflow-x: hidden;
 }
 
 .container {
@@ -7,28 +9,60 @@
   height: 100vh;
 }
 
-.button {
-  padding-top: 10px;
-  display: flex;
-  justify-content: space-between;
+.carousel {
+  height: 100%;
 }
 
-#but, #prev, #next {
-  width: 200px;
-  height: 50px;
+.button {
+  position: relative;
+  padding-top: 10px;
+  display: flex;
+  justify-content: space-evenly;
+  bottom: 0;
+  margin-top: -150px;
+  height: 100%;
+}
+
+#but,
+#prev,
+#next {
+  font-family: 'Roboto Slab';
+  background-color: black;
+  width: 300px;
+  height: 100px;
   border: 0;
   box-shadow: 5px 5px 5px black;
+  cursor: pointer;
+  opacity: 0.7;
+  color: white;
+  font-size: 20px;
+  border-radius: 5px;
+}
+
+#but:hover,
+#prev:hover,
+#next:hover {
+  background-color: rgba(0, 0, 0, 0.521);
+
+  transition: background-color 0.25s;
 }
 
 .slides {
+  margin: 5px;
   position: relative;
-  height: 700px;
-  padding: 0;
-  margin: 0;
+  height: 80%;
   list-style-type: none;
 }
 
+.slide,
+.slides {
+  border-radius: 15px;
+  box-shadow: 0px 10px 15px black;
+}
+
 .slide {
+  background-position: center;
+  background-size: cover;
   position: absolute;
   left: 0;
   top: 0;
@@ -44,26 +78,22 @@
   z-index: 2;
 }
 
-.slide {
-  font-size: 40px;
-  padding: 40px;
-  box-sizing: border-box;
-  background: #333;
-  color: white;
+.slide:nth-of-type(1) {
+  background-image: url('/assets/img/1.jpg');
 }
 
-.slide:nth-of-type(1) {
-  background: red;
-}
 .slide:nth-of-type(2) {
-  background: orange;
+  background-image: url('/assets/img/2.jpg');
 }
+
 .slide:nth-of-type(3) {
-  background: green;
+  background-image: url('/assets/img/3.jpg');
 }
+
 .slide:nth-of-type(4) {
-  background: blue;
+  background-image: url('/assets/img/4.jpg');
 }
+
 .slide:nth-of-type(5) {
-  background: purple;
+  background-image: url('/assets/img/5.jpg');
 }
