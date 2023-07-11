@@ -1,14 +1,12 @@
 * {
-  overflow-x: hidden;
-  overflow-y: hidden;
-
   margin: 0;
+  overflow-y: hidden;
+  overflow-x: hidden;
 }
 
 .container {
-  height: 100vh;
-
   background-color: #333;
+  height: 100vh;
 }
 
 .carousel {
@@ -17,107 +15,64 @@
 
 .button {
   position: relative;
-  bottom: 0;
-
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
-
-  height: 100%;
-  margin-top: -150px;
   padding-top: 10px;
-
-  -webkit-box-pack: space-evenly;
-  -ms-flex-pack: space-evenly;
+  display: flex;
   justify-content: space-evenly;
+  bottom: 0;
+  margin-top: -150px;
+  height: 100%;
 }
 
 #but,
 #prev,
 #next {
-  font-family: 'Roboto Slab';
-  font-size: 20px;
-
+  font-family: "Roboto Slab";
+  background-color: black;
   width: 300px;
   height: 100px;
-
+  border: 0;
+  box-shadow: 5px 5px 5px black;
   cursor: pointer;
-
   opacity: 0.7;
   color: white;
-  border: 0;
+  font-size: 20px;
   border-radius: 5px;
-  background-color: black;
-  -webkit-box-shadow: 5px 5px 5px black;
-  box-shadow: 5px 5px 5px black;
 }
 
 #but:hover,
 #prev:hover,
 #next:hover {
-  -webkit-transition: background-color 0.25s;
-  -o-transition: background-color 0.25s;
-  transition: background-color 0.25s;
-
   background-color: rgba(0, 0, 0, 0.521);
+  transition: background-color 0.25s;
 }
 
 .slides {
-  position: relative;
-
-  height: 80%;
   margin: 5px;
-
+  position: relative;
+  height: 80%;
   list-style-type: none;
 }
 
 .slide,
 .slides {
   border-radius: 15px;
-  -webkit-box-shadow: 0 10px 15px black;
-  box-shadow: 0 10px 15px black;
+  box-shadow: 0px 10px 15px black;
 }
 
 .slide {
-  position: absolute;
-  z-index: 1;
-  top: 0;
-  left: 0;
-
-  width: 100%;
-  height: 100%;
-
-  -webkit-transition: opacity 0.25s;
-  -o-transition: opacity 0.25s;
-  transition: opacity 0.25s;
-
-  opacity: 0;
   background-position: center;
   background-size: cover;
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  opacity: 0;
+  z-index: 1;
+  transition: opacity 0.25s;
 }
 
 .active {
-  z-index: 2;
-
   opacity: 1;
-}
-
-.slide:nth-of-type(1) {
-  background-image: url('/assets/img/1.jpg');
-}
-
-.slide:nth-of-type(2) {
-  background-image: url('/assets/img/2.jpg');
-}
-
-.slide:nth-of-type(3) {
-  background-image: url('/assets/img/3.jpg');
-}
-
-.slide:nth-of-type(4) {
-  background-image: url('/assets/img/4.jpg');
-}
-
-.slide:nth-of-type(5) {
-  background-image: url('/assets/img/5.jpg');
+  z-index: 2;
 }
