@@ -1,19 +1,27 @@
-function Carousel() {
-  this.containers = document.querySelector('.container');
-  this.container = document.querySelector('#carousel');
-  this.slide = this.container.querySelectorAll('.slide');
-  this.active = this.container.querySelectorAll('.active');
-  this.interval = 1000
-}
+class Carousel {
+  constructor(p) {
+    const settings = {
+      ...{
+        containerID: '#carousel',
+        slideID: '.slide',
+        interval: 1000,
+        isPlaying: true,
+      },
+      ...p,
+    };
+    this.containers = document.querySelector('.container');
+    this.container = document.querySelector(settings.containerID);
+    this.slide = this.container.querySelectorAll(settings.slideID);
+    this.interval = settings.interval;
+    this.isPlaying = settings.isPlaying;
+  }
 
-Carousel.prototype = {
   _initProps() {
     this.CODE_SPACE = 'Space';
     this.CODE_ARROW_LEFT = 'ArrowLeft';
     this.CODE_ARROW_RIGHT = 'ArrowRight';
-
     this.i = 0;
-  },
+  }
 
   _initControls() {
     const controls = document.createElement('div');
@@ -32,7 +40,7 @@ Carousel.prototype = {
     this.but = document.querySelector('#but');
     this.prev = document.querySelector('#prev');
     this.next = document.querySelector('#next');
-  },
+  }
 
   _initIndicators() {
     const indicators = document.createElement('div');
@@ -60,7 +68,7 @@ Carousel.prototype = {
       '#indicators-container'
     );
     this.indicatorItem = this.container.querySelectorAll('.indicator');
-  },
+  }
 
   _initListeners() {
     this.but.addEventListener('click', this.pausePlay.bind(this));
@@ -70,12 +78,15 @@ Carousel.prototype = {
       'click',
       this._indicate.bind(this)
     );
+    this.container.addEventListener('mouseenter', this.pause.bind(this));
+    this.container.addEventListener('mouseleave', this.play.bind(this));
+
     document.addEventListener('keydown', this._pressKey.bind(this));
-  },
+  }
 
   _tick() {
     this.timer = setInterval(() => this._nextSlide(), this.interval);
-  },
+  }
 
   _gotoSlide(n) {
     this.slide[this.i].classList.toggle('active');
@@ -83,44 +94,48 @@ Carousel.prototype = {
     this.i = (n + this.slide.length) % this.slide.length;
     this.slide[this.i].classList.toggle('active');
     this.indicatorItem[this.i].classList.toggle('active');
-  },
+  }
 
   _nextSlide() {
     this._gotoSlide(this.i + 1);
-  },
+  }
 
   _prevSlide() {
     this._gotoSlide(this.i - 1);
-  },
+  }
 
   pause() {
-    this.but.innerHTML = 'Play';
-    this.isPlay = false;
-    clearInterval(this.timer);
-  },
+    if (this.but.innerHTML == 'Pause') {
+      this.but.innerHTML = 'Play';
+      this.isPlay = false;
+      clearInterval(this.timer);
+    }
+  }
 
   play() {
-    this.but.innerHTML = 'Pause';
-    this.isPlay = true;
-    this._tick();
-  },
+    if (this.but.innerHTML == 'Play') {
+      this.but.innerHTML = 'Pause';
+      this.isPlay = true;
+      this._tick();
+    }
+  }
 
   pausePlay() {
-    if (this.isPlay == true) this.pause();
+    if (this.but.innerHTML == 'Pause') this.pause();
     else {
       this.play();
     }
-  },
+  }
 
   nextHandler() {
     this.pause();
     this._nextSlide();
-  },
+  }
 
   prevHandler() {
     this._prevSlide();
     this.pause();
-  },
+  }
 
   _indicate(e) {
     const { target } = e;
@@ -129,7 +144,7 @@ Carousel.prototype = {
       this.pause();
       this._gotoSlide(+target.dataset.slideTo);
     }
-  },
+  }
 
   _pressKey(e) {
     if (e.code === this.CODE_SPACE) {
@@ -142,7 +157,7 @@ Carousel.prototype = {
       this._nextSlide();
       this.pause();
     }
-  },
+  }
 
   init() {
     this._initProps();
@@ -150,7 +165,7 @@ Carousel.prototype = {
     this._initIndicators();
     this._initListeners();
     this._tick();
-  },
-};
+  }
+}
 
-Carousel.prototype.constructor = Carousel;
+export default Carousel;
